@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عيد ميلاد سعيد زياد ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #180d28 0%, #2a1147 50%, #130822 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* الخلفية التفاعلية مع جزيئات عائمة */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 150, 255, 0.8) 0%, rgba(138, 43, 226, 0) 70%);
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) scale(0.3);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.6;
+      }
+      80% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* حاوية المحتوى الرئيسية */
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 520px;
+      padding: 2.5rem 1.8rem;
+      background: rgba(35, 18, 58, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                  0 0 30px rgba(147, 51, 234, 0.2);
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    /* أزرار الصوت العليا */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .music-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    /* الشاشات */
+    .screen {
+      display: none;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .screen.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* الصور المصممة للمحادثات والأنمي */
+    .img-frame {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto 1.5rem auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 10, 25, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      max-height: 420px;
+    }
+
+    /* إخفاء إطار الصورة بالكامل إذا تعذّر تحميل الصورة، مع إبقاء الحوار والأزرار */
+    .img-frame.image-unavailable { display: none; }
+
+    /* العناوين والنصوص */
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(192, 132, 252, 0.6);
+    }
+
+    p.story-text {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: #e9d5ff;
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+
+    /* الأزرار التفاعلية */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 24px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: inherit;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(147, 51, 234, 0.35);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(147, 51, 234, 0.5);
+      background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-clickable-name {
+      font-size: 2.5rem;
+      padding: 18px 40px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 35px rgba(168, 85, 247, 0.8);
+      }
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #d8b4fe;
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    /* شاشة النهاية */
+    .ending-heart {
+      font-size: 4rem;
+      margin: 1.5rem 0;
+      animation: heartBeat 1.3s infinite;
+      display: inline-block;
+    }
+
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.2); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.2); }
+      70% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- جزيئات الخلفية البنفسجية -->
+  <div class="bg-animation" id="bgAnimation"></div>
+
+  <!-- زر التحكم بالصوت -->
+  <button class="music-btn" id="musicToggle" onclick="toggleAudio()">
+    <span id="musicIcon">🎵</span> <span id="musicText">الموسيقى</span>
+  </button>
+
+  <!-- الصوت في الخلفية -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="ILOVEYOU.mp4" type="audio/mp4">
+  </audio>
+
+  <div class="container">
+
+    <!-- الشاشة 1: البداية مع اسم زياد -->
+    <div class="screen active" id="screen1">
+      <h1 style="margin-bottom: 2rem; font-size: 1.8rem; color: #e9d5ff;">اضغط على الاسم 👇</h1>
+      <button class="btn btn-clickable-name" onclick="goToScreen(2); playAudio();">زياد</button>
+    </div>
+
+    <!-- الشاشة 2: هلووو حبيبي زيوددد (حوار فقط) -->
+    <div class="screen" id="screen2">
+      <p class="story-text">هلووو حبيبي زيوددد<br>كيفككك</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(3)">اهلاا بخيرر دام زوجتي بخير</button>
+        <button class="btn btn-secondary" id="elusiveBtn" onclick="handleElusiveBtn()">ادور خيار ثاني مافي😡</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 3: تدري كملنا خمس شهور سوا!! (حوار فقط) -->
+    <div class="screen" id="screen3">
+      <p class="story-text">تدري كملنا خمس شهور سوا!!</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(4)">اييي ادرييي</button>
+        <button class="btn btn-secondary" onclick="goToScreen(4)">برضوا تدري غصب عنك</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 4: جاهز تتذكر الذكريات؟ (حوار فقط) -->
+    <div class="screen" id="screen4">
+      <p class="story-text">قررت اخلي بهذا الموقع احلى ذكريات بيننا واهمهم جاهز تتذكرها؟</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(5)">اييي جاااهز</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 5: الذكرى الأولى (أول مرة بالخاص) -> تحتوي على صورة SXZ3.png -->
+    <div class="screen" id="screen5">
+      <div class="img-frame">
+        <img src="SXZ3.png" alt="أول محادثة بالخاص" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <p class="story-text">هنا اول مرا تكلمنا فيها بالخاص ، تعرف لحظتها كنت مبسوطة وهيك لان صديق جديد ماتوقعت بتكون اكثر من مجرد صديق لي</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(6)">ذكرى الي بعدها</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 6: الذكرى الثانية (لما اعترفت لي) -> تحتوي على صورة SXZ4.png -->
+    <div class="screen" id="screen6">
+      <div class="img-frame">
+        <img src="SXZ4.png" alt="محادثة الاعتراف" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <p class="story-text">هنا لما اعترفت لي بحبك ، صراحه هنا كنت مرا مبسوطة لان قبلها كنت احس بشوي مشاعر اتجاهك وبعد كنت حاسه انك تحبني</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(7)">احبك ، ذكرى الي بعدها</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 7: الذكرى الثالثة (أول عيد) -> تحتوي على صورة SX5.jpg -->
+    <div class="screen" id="screen7">
+      <div class="img-frame">
+        <img src="SX5.png" alt="تهنئة العيد" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <p class="story-text">هنا كان اول عيد لنا صح كان وقتها حزانين بس يبقى اول عيد لنا وذكرى جميله</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(8)">ذكرى بعدها</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 8: الذكرى الرابعة (الماضي المحزن) (حوار فقط) -->
+    <div class="screen" id="screen8">
+      <p class="story-text" style="font-size: 1.25rem; line-height: 2;">تعرف قديش مرينا بصعوبات بسبب حبنا لبعض وتركنا بعض بنهايه ب بلوك ومرت حياتنا عادي بدون مانعرف انو ممكن نرجع لبعض</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(9)">…</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 9: الذكرى الخامسة (لما رجعنا لبعض) -> تحتوي على صورة SXZ7.jpg -->
+    <div class="screen" id="screen9">
+      <div class="img-frame">
+        <img src="SXZ7.png" alt="الرجوع لبعض" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <p class="story-text">وهنااا لما رجعنا لبعض وكان شعوررر حلووو كثير لي ولك وصراحة أنا كنت اسعدناس لحظتها لاني رجعت لزيودي وحبيب قلبي وعمري</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(10)">احبببك ، ذكرى الي بعدها</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 10: الذكرى السادسة (أول يوم ميلاد مع زياد) -> تحتوي على صورة SXZ8.png -->
+    <div class="screen" id="screen10">
+      <div class="img-frame">
+        <img src="SXZ8.png" alt="يوم الميلاد" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <p class="story-text">هنا اول يوم ميلاد لي وكنت مع احلى شخص بدينيتي زيااادي وبالنسبة لي مباركتك لي كانت احلى وحدةة من بين كلها لانها انكتبت بيد الحلو زيود</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(11)">اعشقككك</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 11: الانتهاء من الذكريات البسيطة (حوار فقط) -->
+    <div class="screen" id="screen11">
+      <p class="story-text" style="font-size: 1.3rem;">انتهينا من ذكريات بسيطة بس لسه ما انتهينا بالكامل ، مستعد للي بعدة؟</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(12)">يبببب</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 12: تهنئة عيد الميلاد لزياد (حوار فقط) -->
+    <div class="screen" id="screen12">
+      <p class="story-text" style="font-size: 1.05rem; text-align: justify; line-height: 1.9;">
+        كل عام وانت بخير زيااادي هذا المفروض اول يوم ميلاد لك معي وان شاء الله كل سنه نكبر سوا ويكبر حبنا سوا إلى ان نوصل نحتفل مع بعض ب بيت واحد وباذن الله بيكون يوم نحتفل فيه مع ولدنا او بنتنا او اثنينهم ياررب اتمنى لك كل عمر وسنة حلوة وما تنساها من حلاوتها يارب واتمنى من كل قلبي وباذن ربي اتزوجك ب احد ايام حياتك الحلوة
+      </p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(13)">جاوبني بل خاص</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 13: وصلنا للنهاية (حوار فقط) -->
+    <div class="screen" id="screen13">
+      <p class="story-text" style="font-size: 1.3rem;">وكدا وصلنا للنهايه احبك واعشقك يا حياتي وروحي زيودي يارب يجعلك لي</p>
+      <div class="btn-group">
+        <button class="btn" onclick="goToScreen(14)">احببك</button>
+      </div>
+    </div>
+
+    <!-- الشاشة 14: النهاية... -->
+    <div class="screen" id="screen14">
+      <div class="ending-heart">💜</div>
+      <h1 style="font-size: 2.5rem; color: #f3e8ff;">النهاية…</h1>
+    </div>
+
+  </div>
+
+  <script>
+    // إنشاء الجزيئات العائمة بالخلفية
+    const bgAnimation = document.getElementById('bgAnimation');
+    const particleCount = 22;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      const size = Math.random() * 20 + 8;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${Math.random() * 8 + 6}s`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      bgAnimation.appendChild(particle);
+    }
+
+    // التنقل بين الشاشات
+    function goToScreen(screenNumber) {
+      const currentActive = document.querySelector('.screen.active');
+      const targetScreen = document.getElementById(`screen${screenNumber}`);
+
+      if (currentActive) {
+        currentActive.style.opacity = '0';
+        currentActive.style.transform = 'translateY(-15px)';
+        setTimeout(() => {
+          currentActive.classList.remove('active');
+          if (targetScreen) {
+            targetScreen.classList.add('active');
+            setTimeout(() => {
+              targetScreen.style.opacity = '1';
+              targetScreen.style.transform = 'translateY(0)';
+            }, 50);
+          }
+        }, 400);
+      }
+    }
+
+    // زر الخيار المضحك
+    let elusiveClicks = 0;
+    function handleElusiveBtn() {
+      const btn = document.getElementById('elusiveBtn');
+      elusiveClicks++;
+      if (elusiveClicks === 1) {
+        btn.innerText = 'قلت لك مافي خيار ثاني! 😜';
+      } else if (elusiveClicks === 2) {
+        btn.innerText = 'مافي إلا تختار الخيار الأول 😂';
+      } else {
+        goToScreen(3);
+      }
+    }
+
+    // تشغيل الموسيقى ومزامنة الزر مع الحالة الفعلية للصوت
+    const audio = document.getElementById('bgMusic');
+    let isPlaying = false;
+
+    function playAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        updateMusicBtnUI();
+      }).catch(() => {
+        isPlaying = false;
+        updateMusicBtnUI();
+      });
+    }
+
+    async function toggleAudio() {
+      if (!audio.paused) {
+        audio.pause();
+      } else {
+        try {
+          await audio.play();
+        } catch (error) {
+          console.warn('تعذّر تشغيل الموسيقى. تأكدي أن ملف ILOVEYOU.mp4 موجود بجانب ملف HTML وأن المتصفح يدعم الصوت بداخله.');
+        }
+      }
+      isPlaying = !audio.paused;
+      updateMusicBtnUI();
+    }
+
+    audio.addEventListener('play', () => {
+      isPlaying = true;
+      updateMusicBtnUI();
+    });
+    audio.addEventListener('pause', () => {
+      isPlaying = false;
+      updateMusicBtnUI();
+    });
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      updateMusicBtnUI();
+    });
+
+    function updateMusicBtnUI() {
+      const icon = document.getElementById('musicIcon');
+      const text = document.getElementById('musicText');
+      if (isPlaying) {
+        icon.innerText = '🎶';
+        text.innerText = 'إيقاف الموسيقى';
+      } else {
+        icon.innerText = '🎵';
+        text.innerText = 'تشغيل الموسيقى';
+      }
+    }
+  </script>
+</body>
+</html>
